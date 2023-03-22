@@ -37,8 +37,9 @@ const NavBarStyle = styled.div`
   img {
     width: 400px;
     position: absolute;
-    right: 40vw;
+    left: 50%;
     top: 150px;
+    margin-left: -200px;
   }
 `;
 
