@@ -1,11 +1,19 @@
+import React from 'react';
+import styled from 'styled-components';
+import NavBar from '../../components/navbar';
+
 function Home() {
   return (
     <>
-      <div>
-        <h1>ola</h1>
-      </div>
+      <HomePage>
+        <NavBar />
+      </HomePage>
     </>
   )
 };
+
+const HomePage = styled.div`
+
+`;
 
 export default Home;
