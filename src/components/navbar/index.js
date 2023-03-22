@@ -1,12 +1,19 @@
 import React from 'react';
 import styled from 'styled-components';
+import logo from '../../assets/images/Logo.svg';
 
 function NavBar() {
   return (
     <>
       <NavBarStyle>
-        <EntryButton>Entrar</EntryButton>
-        <SignupButton>Cadastrar-se</SignupButton>
+        <img src={logo} alt='Logo' />
+        <div>
+          {''}
+        </div>
+        <div>
+          <EntryButton>Entrar</EntryButton>
+          <SignupButton>Cadastrar-se</SignupButton>
+        </div>
       </NavBarStyle>
     </>
   )
@@ -14,19 +21,24 @@ function NavBar() {
 
 const NavBarStyle = styled.div`
   display: flexbox;
-  justify-content: flex-end;
+  justify-content: space-between;
   align-items: center;
-  height: 10vh;
-  padding-right: 10px;
+  height: 20vh;
+  padding-right: 100px;
   button {
     border: none;
     background-color: #ffffff;
     font-size: 14px;
-
     :hover {
       transform: scale(1.1);
       transition: 0.2s;
     }
+  }
+  img {
+    width: 400px;
+    position: absolute;
+    right: 40vw;
+    top: 150px;
   }
 `;
 
