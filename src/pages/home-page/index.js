@@ -7,15 +7,19 @@ function Home() {
   return (
     <>
       <HomePage>
-        <NavBar />
         <Ranking />
+        <h1>Crie sua conta para usar nosso serviço!</h1>
       </HomePage>
     </>
   )
 };
 
 const HomePage = styled.div`
-
+  & > h1 {
+    font-size: 36px;
+    font-weight: 700;
+    text-align: center;
+  }
 `;
 
 export default Home;

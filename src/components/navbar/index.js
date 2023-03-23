@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/images/Logo.svg';
 
 function NavBar() {
+  const navigate = new useNavigate();
+
+  function navigateTo(string) {
+    navigate(`/${string}`);
+  }
+
   return (
     <>
       <NavBarStyle>
@@ -11,8 +18,12 @@ function NavBar() {
           {''}
         </div>
         <div>
-          <EntryButton>Entrar</EntryButton>
-          <SignupButton>Cadastrar-se</SignupButton>
+          <EntryButton onClick={() => {
+            navigateTo('signin')
+          }} >Entrar</EntryButton>
+          <SignupButton onClick={() => {
+            navigateTo('signup')
+          }} >Cadastrar-se</SignupButton>
         </div>
       </NavBarStyle>
     </>

@@ -56,7 +56,7 @@ const RankingStyle = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  height: 65vh;
+  height: 60vh;
   margin-top: 50px;
   h1 {
     font-size: 36px;
