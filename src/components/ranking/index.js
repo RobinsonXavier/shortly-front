@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import trophy from '../../assets/images/trophy.svg';
 import getSortedRanking from '../../services/rankingService';
+import RankingList from './rankingList';
 
 function Ranking() {
   const [ranking, setRanking] = React.useState([]);
@@ -37,9 +38,13 @@ function Ranking() {
         {
           ranking.length 
           ?
-          ranking.map( (element, index) => index+ 1 + '.' + element.name + '-' + element.linkCount + 'links-' + element.visitCount + ' visualizações')
+          ranking.map( (element, index) => {
+            const message = index+ 1 + '. ' + element.name + ' - ' + element.linkCount + ' links - ' + element.visitCount + ' visualizações';
+
+            return <RankingList key={element.id} message={message}/>
+          })
           :
-          ranking.message
+          <RankingList message={ranking.message} /> 
         }
       </RankingScore>
     </RankingStyle>
@@ -68,10 +73,12 @@ const RankingTitle = styled.div`
   }
 `;
 const RankingScore = styled.div`
+  box-sizing: border-box;
   border: 1px #78B15940 solid;
   border-radius: 10px;
   height: 250px;
   width: 1100px;
+  padding-top: 12px;
 `;
 
 export default Ranking;
