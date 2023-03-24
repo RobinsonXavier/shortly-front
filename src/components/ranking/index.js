@@ -17,7 +17,7 @@ function Ranking() {
       return
     }
     if(requestData.length > 5) {
-      setRanking(requestData.slice(5));
+      setRanking(requestData.slice(0,5));
     } else {
       setRanking(requestData);
     }
