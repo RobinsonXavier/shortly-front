@@ -88,6 +88,7 @@ function Signup() {
             <input name='confirmPassword' placeholder='Confirmar senha' type='text' onChange={inputHandler} required />
             <button type='submit' >Criar Conta</button>
           </>
+          
         }
       </form>.
     </SignupStyle>
