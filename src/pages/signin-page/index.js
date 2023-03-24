@@ -1,12 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import createAccount from '../../services/signupService';
 import ErrorAnswer from '../../components/authComponents/errorAnswer';
+import login from '../../services/signinService';
 
-function Signup() {
+
+function Signin() {
   const [form, setForm] = React.useState({});
   const [answer, setAnswer] = React.useState(0);
   const [requestError, setRequestError] = React.useState({});
+  const navigate = new useNavigate();
 
   function inputHandler(ev) {
     setForm({
@@ -18,28 +21,7 @@ function Signup() {
   async function submitHandler(ev) {
     ev.preventDefault();
 
-    if(form.password.length < 8) {
-      setRequestError({
-        message: 'A senha tem que ter pelo menos 8 caracteres'
-      });
-      setAnswer(2);
-      return
-    }
-
-    if(form.username.length < 3) {
-      setRequestError({
-        message: 'O nome tem que ter pelo menos 3 caracteres'
-      });
-      setAnswer(2);
-      return
-    }
-
-    if(form.password !== form.confirmPassword) {
-      setAnswer(1);
-      return
-    }
-
-    const request = await createAccount(form);
+    const request = await login(form);
 
     if (request.message) {
       setRequestError({
@@ -50,17 +32,16 @@ function Signup() {
       return
     }
 
-    setAnswer(3);  
+    setAnswer(3);
+    setTimeout(() => {
+      navigate('/');
+    },1000);
   }
 
   return (
-    <SignupStyle>
+    <SigninStyle>
       <form onSubmit={submitHandler}>
         {
-        answer === 1 
-        ?
-        <ErrorAnswer message={'As senhas precisam estar idênticas'} />
-        : 
         answer === 2 
         ?
         <ErrorAnswer message={requestError.message} status={requestError.status} />
@@ -75,32 +56,28 @@ function Signup() {
           answer === 3
           ?
           <>
-            <DisabledInput name='username' placeholder='Nome' type='text' onChange={inputHandler} disabled />
             <DisabledInput name='email' placeholder='E-mail' type='text' onChange={inputHandler} disabled />
             <DisabledInput name='password' placeholder='Senha' type='text' onChange={inputHandler} disabled />
-            <DisabledInput name='confirmPassword' placeholder='Confirmar senha' type='text' onChange={inputHandler} disabled />
-            <DisabledButton type='submit' disabled >Criar Conta</DisabledButton>
+            <DisabledButton type='submit' disabled >Entrar</DisabledButton>
           </>
           :
           <>
-            <input name='username' placeholder='Nome' type='text' onChange={inputHandler} required />
             <input name='email' placeholder='E-mail' type='text' onChange={inputHandler} required />
             <input name='password' placeholder='Senha' type='text' onChange={inputHandler} required />
-            <input name='confirmPassword' placeholder='Confirmar senha' type='text' onChange={inputHandler} required />
-            <button type='submit' >Criar Conta</button>
+            <button type='submit' >Entrar</button>
           </>
-
+          
         }
       </form>.
-    </SignupStyle>
+    </SigninStyle>
   )
 };
 
-const SignupStyle = styled.div`
+const SigninStyle = styled.div`
   display: flexbox;
   justify-content: center;
   align-items: center;
-  height: 60vh;
+  height: 40vh;
   margin-top: 50px;
 
   form {
@@ -130,6 +107,7 @@ const SignupStyle = styled.div`
       border-radius: 10px;
       height: 60px;
       width: 180px;
+      margin-top: 25px;
       background-color: #5D9040;
       color: #ffffff;
     }
@@ -152,4 +130,4 @@ const DisabledButton = styled.input`
 
 `;
 
-export default Signup;
+export default Signin;

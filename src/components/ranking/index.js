@@ -25,7 +25,6 @@ function Ranking() {
 
   React.useEffect(() => {
     getRanking();
-    console.log(ranking);
   }, []);
 
   return (

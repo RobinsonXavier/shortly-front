@@ -7,7 +7,8 @@ import {
 import NavBar from './components/navbar';
 import {
   Home, 
-  Signup
+  Signup,
+  Signin
 } from './pages/index';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/signup' element={<Signup />} />
-
+        <Route path='/signin' element={<Signin />} />
       </Routes>
     </BrowserRouter>
   );
