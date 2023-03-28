@@ -10,16 +10,20 @@ import {
   Signup,
   Signin
 } from './pages/index';
+import UserContext from './contexts/userContext';
 
 function App() {
+  const [config, setConfig] = React.useState();
   return (
     <BrowserRouter>
-      <NavBar /> 
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/signup' element={<Signup />} />
-        <Route path='/signin' element={<Signin />} />
-      </Routes>
+      <UserContext.Provider value={{config, setConfig}}>
+        <NavBar /> 
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/signup' element={<Signup />} />
+          <Route path='/signin' element={<Signin />} />
+        </Routes>
+      </UserContext.Provider>
     </BrowserRouter>
   );
 }

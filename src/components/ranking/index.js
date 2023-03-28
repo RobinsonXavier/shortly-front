@@ -1,12 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import trophy from '../../assets/images/trophy.svg';
+import UserContext from '../../contexts/userContext';
 import getSortedRanking from '../../services/rankingService';
 import RankingList from './rankingList';
 
 function Ranking() {
   const [ranking, setRanking] = React.useState([]);
-
+  const {config, setConfig} = React.useContext(UserContext);
+  
   async function getRanking() {
     const requestData = await getSortedRanking();
 
@@ -31,7 +33,7 @@ function Ranking() {
     <RankingStyle>
       <RankingTitle>
         <img src={trophy} alt='Ranking'/>
-        <h1>Ranking</h1>
+        <RankingTitleH1>Ranking</RankingTitleH1>
       </RankingTitle>
       <RankingScore>
         {
@@ -45,6 +47,13 @@ function Ranking() {
           :
           <RankingList message={ranking.message} /> 
         }
+        {
+          config
+          ?
+          null
+          :
+          <RankingH1>Crie sua conta para usar nosso serviço!</RankingH1> 
+        }
       </RankingScore>
     </RankingStyle>
   )
@@ -57,10 +66,7 @@ const RankingStyle = styled.div`
   justify-content: space-evenly;
   height: 60vh;
   margin-top: 50px;
-  h1 {
-    font-size: 36px;
-    font-weight: 700;
-  }
+
 `;
 const RankingTitle = styled.div`
   display: flexbox;
@@ -78,6 +84,18 @@ const RankingScore = styled.div`
   height: 250px;
   width: 1100px;
   padding-top: 12px;
+`;
+
+const RankingTitleH1 = styled.h1`
+  font-size: 36px;
+  font-weight: 700;
+`;
+
+const RankingH1 = styled.h1`
+  font-size: 36px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 100px;
 `;
 
 export default Ranking;
