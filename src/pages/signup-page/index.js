@@ -49,7 +49,7 @@ function Signup() {
       setAnswer(2);
       return
     }
-
+    setForm({});
     setAnswer(3);  
   }
 
@@ -91,7 +91,7 @@ function Signup() {
           </>
 
         }
-      </form>.
+      </form>
     </SignupStyle>
   )
 };
@@ -146,7 +146,7 @@ const DisabledInput = styled.input`
 
 `;
 
-const DisabledButton = styled.input`
+const DisabledButton = styled.button`
   background-color: #78B15940;
   color: gray;
 

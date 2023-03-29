@@ -2,8 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import logo from '../../assets/images/Logo.svg';
+import UserContext from '../../contexts/userContext';
+import NavWelcome from './navWelcome';
 
 function NavBar() {
+  const {config, setConfig} = React.useContext(UserContext);
   const navigate = new useNavigate();
 
   function navigateTo(string) {
@@ -15,16 +18,40 @@ function NavBar() {
       <NavBarStyle>
         <img src={logo} alt='Logo' />
         <div>
-          {''}
+          {
+            config
+            ?
+            <NavWelcome name={config.name} />
+            :
+            ''
+          }
         </div>
-        <div>
-          <EntryButton onClick={() => {
-            navigateTo('signin')
-          }} >Entrar</EntryButton>
-          <SignupButton onClick={() => {
-            navigateTo('signup')
-          }} >Cadastrar-se</SignupButton>
-        </div>
+        {
+          config
+          ?
+          <div>
+            <EntryButton onClick={() => {
+              navigateTo('/')
+            }} >Home</EntryButton>
+            <SignupButton onClick={() => {
+              navigateTo('ranking')
+            }} >Ranking</SignupButton>
+            <SignupButton onClick={() => {
+              setConfig();
+              navigateTo('/')
+            }} >Sair</SignupButton>
+          </div>
+          :
+          <div>
+            <EntryButton onClick={() => {
+              navigateTo('signin')
+            }} >Entrar</EntryButton>
+            <SignupButton onClick={() => {
+              navigateTo('signup')
+            }} >Cadastrar-se</SignupButton>
+          </div>
+        }
+        
       </NavBarStyle>
     </>
   )

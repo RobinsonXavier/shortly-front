@@ -2,10 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ErrorAnswer from '../../components/authComponents/errorAnswer';
+import UserContext from '../../contexts/userContext';
 import login from '../../services/signinService';
 
 
 function Signin() {
+  const {config, setConfig} = React.useContext(UserContext);
   const [form, setForm] = React.useState({});
   const [answer, setAnswer] = React.useState(0);
   const [requestError, setRequestError] = React.useState({});
@@ -31,7 +33,7 @@ function Signin() {
       setAnswer(2);
       return
     }
-
+    setConfig(request);
     setAnswer(3);
     setTimeout(() => {
       navigate('/');
@@ -48,7 +50,7 @@ function Signin() {
         : 
         answer === 3
         ?
-        <GreenSpan>Conta criada com sucesso !!</GreenSpan>
+        <GreenSpan>Login bem sucedido!</GreenSpan>
         :
         null
         }
@@ -124,7 +126,7 @@ const DisabledInput = styled.input`
 
 `;
 
-const DisabledButton = styled.input`
+const DisabledButton = styled.button`
   background-color: #78B15940;
   color: gray;
 

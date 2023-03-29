@@ -2,9 +2,12 @@ import api from './axiosApi';
 
 async function statusUpdate(config) {
   const token = "Bearer " + config.token;
-  const request = await api.put('status',config , {
+  const request = await api.post('status',{} , {
     Authorization: {
       token 
+    },
+    user: {
+      userId: config.userId
     }
   })
     .catch(error => {
