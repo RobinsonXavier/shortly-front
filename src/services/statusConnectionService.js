@@ -2,21 +2,19 @@ import api from './axiosApi';
 
 async function statusUpdate(config) {
   const token = "Bearer " + config.token;
-  const request = await api.post('status',{} , {
-    Authorization: {
-      token 
-    },
-    user: {
-      userId: config.userId
+  const headers = {
+    headers: {
+      'Authorization': `${token}`,
+      'user': `${config.userId}`
     }
-  })
+  };
+  const request = await api.post('status',{} , headers)
     .catch(error => {
       return {
         message: error.response.data,
         status: error.response.status
       }
     });
-  
   console.log('Atualizado!');
 }
 

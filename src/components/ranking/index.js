@@ -95,7 +95,7 @@ const RankingH1 = styled.h1`
   font-size: 36px;
   font-weight: 700;
   text-align: center;
-  margin-top: 100px;
+  margin-top: 140px;
 `;
 
 export default Ranking;

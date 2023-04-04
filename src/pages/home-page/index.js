@@ -3,26 +3,17 @@ import styled from 'styled-components';
 import LinkTool from '../../components/linkTool';
 import Ranking from '../../components/ranking';
 import UserContext from '../../contexts/userContext';
-import statusUpdate from '../../services/statusConnectionService';
 
 function Home() {
   const {config, setConfig} = React.useContext(UserContext);
-
-  React.useEffect(() => {
-    if(config) {
-      setInterval(() => {
-        statusUpdate(config)
-      }, 5000);
-    }
-  }, []);
-  
+  const [urls, setUrls] = React.useState(0);
   return (
     <>
       <HomePage>
         {
           config
           ?
-          <LinkTool />
+          <LinkTool urls={urls} setUrls={setUrls} />
           :
           <Ranking />
         }

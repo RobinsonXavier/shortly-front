@@ -7,6 +7,7 @@ function NavWelcome({ name }) {
 };
 
 const NavWelcomeStyle = styled.span`
+  margin-left: 50px;
   font-size: 14px;
   font-weight: 400;
   color: #5D9040;

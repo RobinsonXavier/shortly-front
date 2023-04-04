@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import ErrorAnswer from '../../components/authComponents/errorAnswer';
 import UserContext from '../../contexts/userContext';
 import login from '../../services/signinService';
+import statusUpdate from '../../services/statusConnectionService';
+
 
 
 function Signin() {
@@ -33,12 +35,20 @@ function Signin() {
       setAnswer(2);
       return
     }
-    setConfig(request);
+    setConfig(request.data);
     setAnswer(3);
-    setTimeout(() => {
-      navigate('/');
-    },1000);
   }
+
+  React.useEffect(() => {
+    if(config) {
+      setInterval(() => {
+        statusUpdate(config)
+      }, 5000);
+      setTimeout(() => {
+        navigate('/');
+      },1000);
+    }
+  }, [config]);
 
   return (
     <SigninStyle>

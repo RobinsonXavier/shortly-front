@@ -11,6 +11,7 @@ import {
   Signin
 } from './pages/index';
 import UserContext from './contexts/userContext';
+import Ranking from './components/ranking';
 
 function App() {
   const [config, setConfig] = React.useState();
@@ -22,6 +23,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/signup' element={<Signup />} />
           <Route path='/signin' element={<Signin />} />
+          <Route path='/ranking' element={<Ranking />} />
         </Routes>
       </UserContext.Provider>
     </BrowserRouter>

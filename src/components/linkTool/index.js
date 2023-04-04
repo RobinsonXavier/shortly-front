@@ -7,11 +7,10 @@ import {
 } from '../../services/urlService';
 import ShortLink from './shortLink';
 
-function LinkTool() {
+function LinkTool({urls, setUrls}) {
   const {config, setConfig} = React.useContext(UserContext);
   const [form, setForm] = React.useState({});
-  const [urls, setUrls] = React.useState([]);
-
+  const [render, setRender] = React.useState(false);
   function inputHandler(ev) {
     setForm({
       ...form,
@@ -23,29 +22,30 @@ function LinkTool() {
     ev.preventDefault();
 
     const request = await postNewUrl(form, config);
-    console.log(request);
+    console.log(form);
 
     if(request.message) {
       console.log(request.message)
     }
 
+    setTimeout(()=> {
+      setRender(!render)
+    }, 1000)
   }
 
   async function userUrls() {
     const request = await getUserUrls(config);
-
     if(request.message) {
       console.log(request.message)
     }
-
-    setUrls(request);
+    const newUrls = [request];
+    console.log(urls)
+    setUrls(...newUrls);
   }
 
   React.useEffect(() => {
     userUrls();
-  }, [urls]);
-
-
+  }, [render]);
 
   return(
     <LinkToolStyle>
@@ -54,9 +54,9 @@ function LinkTool() {
         <button type='submit' >Encurtar link</button>
       </form>
       {
-        urls.length > 0
+        urls[0]
         ?
-        urls.map( element => <ShortLink url={element.url} shortUrl={element.shortUrl} visitCount={element.visitCount} />)
+        urls.map( element => <ShortLink key={element.id} render={render} setRender={setRender} id={element.id} url={element.url} shortUrl={element.shortUrl} visitCount={element.visitCount} />)
         :
         <span>Você não tem Urls encurtadas</span>
       }
@@ -72,7 +72,7 @@ const LinkToolStyle = styled.div`
   height: 60vh;
   margin-top: 50px;
 
-  span{
+  & > span{
     color: red;
   }
 
@@ -89,21 +89,27 @@ const LinkToolStyle = styled.div`
     width: 770px;
     height: 60px;
     padding-left: 10px;
-
+    margin-right: 120px;
+    font-size: 18px;
+    font-weight: 400;
     :focus{
       outline: none;
     }
   }
 
-  button {
+  form {
+    button {
     box-sizing: border-box;
     border: none;
     border-radius: 10px;
     height: 60px;
-    width: 180px;
+    width: 210px;
     margin-top: 25px;
     background-color: #5D9040;
     color: #ffffff;
+    font-size: 18px;
+    font-weight: 400;
+  }
   }
 `;
 

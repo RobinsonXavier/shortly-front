@@ -2,11 +2,13 @@ import api from './axiosApi';
 
 async function getUserUrls(config) {
   const token = "Bearer " + config.token;
-  const request = api.get(`urls`, {
-    Authorization: {
-      token
+  const headers = {
+    headers: {
+      'Authorization': `${token}`,
+      'user': `${config.userId}`
     }
-  })
+  };
+  const request = await api.get('urls', headers)
     .catch( error => {
       return {
         message: error.response.data,
@@ -19,11 +21,13 @@ async function getUserUrls(config) {
 
 async function postNewUrl(data, config) {
   const token = "Bearer " + config.token;
-  const request = api.post('urls/shorten', data, {
-    Authorization: {
-      token
+  const headers = {
+    headers: {
+      'Authorization': `${token}`,
+      'user': `${config.userId}`
     }
-  })
+  };
+  const request = await api.post('urls/shorten', data, headers)
     .catch( error => {
       return {
         message: error.response.data,
@@ -34,8 +38,28 @@ async function postNewUrl(data, config) {
   return request;
 }
 
+async function deleteUrl(id, config) {
+  const token = "Bearer " + config.token;
+  const headers = {
+    headers: {
+      'Authorization': `${token}`,
+      'user': `${config.userId}`
+    }
+  };
+  const request = api.delete(`urls/${id}`, headers)
+    .catch( error => {
+      return {
+        message: error.response.data,
+        status: error.response.status
+      }
+    });
+  
+  console.log('Link encurtado deletado')
+}
+
 
 export {
   getUserUrls,
-  postNewUrl
+  postNewUrl,
+  deleteUrl
 };

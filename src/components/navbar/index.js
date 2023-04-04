@@ -31,14 +31,14 @@ function NavBar() {
           ?
           <div>
             <EntryButton onClick={() => {
-              navigateTo('/')
+              navigateTo('')
             }} >Home</EntryButton>
             <SignupButton onClick={() => {
               navigateTo('ranking')
             }} >Ranking</SignupButton>
             <SignupButton onClick={() => {
               setConfig();
-              navigateTo('/')
+              window.location.reload();
             }} >Sair</SignupButton>
           </div>
           :
