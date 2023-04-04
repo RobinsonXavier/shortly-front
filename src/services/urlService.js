@@ -57,7 +57,6 @@ async function deleteUrl(id, config) {
   console.log('Link encurtado deletado')
 }
 
-
 export {
   getUserUrls,
   postNewUrl,

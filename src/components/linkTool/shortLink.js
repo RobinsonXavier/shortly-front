@@ -17,19 +17,21 @@ function ShortLink({ url, shortUrl, visitCount, id, render, setRender }) {
 
   return (
     <ShortLinkStyle>
-      <GreenStyle>
-        <span>
-          {
-            url.length > 30
-            ?
-            url.slice(0, 30) + '...'
-            :
-            url
-          }
-        </span>
-        <span>{shortUrl}</span>
-        <span>Quantidade de visitantes: {visitCount}</span>
-      </GreenStyle>
+      <a href={url} target='_blank'>
+        <GreenStyle>
+          <span>
+            {
+              url.length > 30
+              ?
+              url.slice(0, 30) + '...'
+              :
+              url
+            }
+          </span>
+          <span>{shortUrl}</span>
+          <span>Quantidade de visitantes: {visitCount}</span>
+        </GreenStyle>
+      </a>
       <WhiteStyle onClick={deleteClick}>
         <img src={lixeira} alt='lixeira' />
       </WhiteStyle>
@@ -47,6 +49,11 @@ const ShortLinkStyle = styled.div`
   color: #ffffff;
   font-size: 14px;
   font-weight: 400;
+
+  & > a {
+    text-decoration: none;
+    color: #ffffff;
+  } 
 `;
 
 const GreenStyle = styled.div`
